@@ -1,4 +1,4 @@
-package opennotify
+package openNotify
 
 import (
 	"encoding/json"
