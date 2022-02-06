@@ -1,11 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 )
 
 type people struct {
@@ -32,7 +29,7 @@ func main() {
 
 	url := "http://api.open-notify.org/astros.json"
 
-	people, err := getAstros(url)
+	people, err := openNotify.peopleinspace(url)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,35 +38,4 @@ func main() {
 	for _, p := range people.Person {
 		fmt.Printf("Let's wave to: %s\n They are on the %s\n", p.Name, p.Craft)
 	}
-}
-
-func getAstros(apiUrl string) (people, error) {
-	p := people{}
-
-	req, err := http.NewRequest(http.MethodGet, apiUrl, nil)
-	if err != nil {
-		return p, err
-	}
-
-	req.Header.Set("User-Agent", "spacecount-tutorial")
-
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return p, err
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return p, err
-	}
-
-	if err := json.Unmarshal(body, &p); err != nil {
-		return p, err
-	}
-
-	return p, nil
 }
