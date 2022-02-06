@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"github.com/benji2512/httpFetchGoTut/openNotify"
 )
 
 type people struct {
@@ -29,7 +30,7 @@ func main() {
 
 	url := "http://api.open-notify.org/astros.json"
 
-	people, err := openNotify.peopleinspace(url)
+	people, err := peopleinspace.getAstros(url)
 	if err != nil {
 		log.Fatal(err)
 	}

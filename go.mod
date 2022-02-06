@@ -1,3 +1,3 @@
-module github.com/benji2512/httpFetchGoTut
+module openNotify
 
 go 1.17
