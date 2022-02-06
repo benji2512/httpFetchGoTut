@@ -21,7 +21,7 @@ type craft struct {
 	Craft string `json:"craft"`
 }
 
-func getAstros(apiUrl string) (people, error) {
+func Getastros(apiUrl string) (people, error) {
 	p := people{}
 
 	req, err := http.NewRequest(http.MethodGet, apiUrl, nil)
